@@ -15,6 +15,3 @@ class Rectangle(Figure):
     @property
     def get_perimeter(self):
         return (self.side_a + self.side_b) * 2
-
-
-rectangle = Rectangle(1, 4)

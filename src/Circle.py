@@ -14,6 +14,3 @@ class Circle(Figure):
     @property
     def get_perimeter(self):
         return 2 * math.pi * self.radius
-
-
-circle = Circle(3)

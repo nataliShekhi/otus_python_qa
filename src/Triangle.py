@@ -27,6 +27,3 @@ class Triangle(Figure):
     def get_perimeter(self):
         return self.side_a + self.side_b + self.side_c
 
-
-triangle = Triangle.create_triangle(3, 7, 6)
-

@@ -14,6 +14,3 @@ class Square(Rectangle):
     @property
     def get_perimeter(self):
         return (self.side_a + self.side_b) * 2
-
-
-square = Square(5)
