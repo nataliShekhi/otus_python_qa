@@ -20,7 +20,7 @@ class Triangle(Figure):
 
     @property
     def area(self):
-        half_perimetr = self.get_perimeter/2
+        half_perimetr = self.perimeter/2
         return math.sqrt(half_perimetr * (half_perimetr - self.side_a) * (half_perimetr - self.side_b) * (half_perimetr - self.side_c))
 
     @property
