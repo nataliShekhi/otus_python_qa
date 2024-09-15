@@ -1,4 +1,4 @@
-from Figure import Figure
+from figure import Figure
 import math
 
 
@@ -8,9 +8,9 @@ class Circle(Figure):
             raise ValueError("Радиус круга не может быть меньше 0")
         self.radius = radius
     @property
-    def get_area(self):
+    def area(self):
         return math.pi * self.radius ** 2
 
     @property
-    def get_perimeter(self):
+    def perimeter(self):
         return 2 * math.pi * self.radius

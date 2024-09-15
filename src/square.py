@@ -1,4 +1,4 @@
-from Rectangle import Rectangle
+from rectangle import Rectangle
 
 
 class Square(Rectangle):
@@ -8,9 +8,9 @@ class Square(Rectangle):
         super().__init__(side_a, side_a)
 
     @property
-    def get_area(self):
+    def area(self):
         return self.side_a * self.side_b
 
     @property
-    def get_perimeter(self):
+    def perimeter(self):
         return (self.side_a + self.side_b) * 2
