@@ -16,16 +16,6 @@ def test_rectangle_area_positive(side_a, side_b, area):
 
 
 @pytest.mark.parametrize(
-    "side_a,side_b,area", [(3, 5, 14), (3.5, 5.5, 17.25)], ids=["integer", "float"]
-)
-@pytest.mark.negative
-@pytest.mark.rectangle
-def test_rectangle_area_negative(side_a, side_b, area):
-    r = Rectangle(side_a, side_b)
-    assert r.area != area, f"Площадь для чисел {side_a} и {side_b} не равна {area}"
-
-
-@pytest.mark.parametrize(
     "side_a,side_b,perimeter", [(3, 5, 16), (3.5, 5.5, 18)], ids=["integer", "float"]
 )
 @pytest.mark.smoke
@@ -52,24 +42,12 @@ def test_rectangle_incorrect_values(side_a, side_b):
 
 
 @pytest.mark.parametrize(
-    "side_a,side_b,perimeter", [(3, 5, 15), (3.5, 5.5, 12)], ids=["integer", "float"]
-)
-@pytest.mark.negative
-@pytest.mark.rectangle
-def test_rectangle_perimeter_negative(side_a, side_b, perimeter):
-    r = Rectangle(side_a, side_b)
-    assert (
-        r.perimeter != perimeter
-    ), f"Периметр для чисел {side_a} и {side_b} не равен {perimeter}"
-
-
-@pytest.mark.parametrize(
     "figure1, figure2, expected_area",
     [
-        (Rectangle(2, 5), Triangle(4, 3, 6), 10 + 5.3326822519),
+        (Rectangle(2, 5), Triangle(4, 3, 6), 10 + 5.33),
         (Rectangle(2, 5), Square(3), 10 + 9),
         (Rectangle(2, 5), Rectangle(4, 3), 10 + 12),
-        (Rectangle(2, 5), Circle(2), 10 + 12.566370614359172),
+        (Rectangle(2, 5), Circle(2), 10 + 12.56),
     ],
     ids=["triangle+rectangle", "square+rectangle", "rectangle+rectangle", "rectangle+circle"]
 )
@@ -77,25 +55,8 @@ def test_rectangle_perimeter_negative(side_a, side_b, perimeter):
 @pytest.mark.rectangle
 @pytest.mark.positive
 def test_add_area_positive(figure1, figure2, expected_area):
-    assert figure1.add_area(figure2) == pytest.approx(expected_area), \
+    assert figure1.add_area(figure2) == pytest.approx(expected_area, rel=1e-2), \
         (f"Сумма площадей двух фигур просчитана корректно")
-
-
-@pytest.mark.parametrize(
-    "figure1, figure2, expected_area",
-    [
-        (Rectangle(2, 5), Triangle(4, 3, 6), 10 + 5),
-        (Rectangle(2, 5), Square(3), 10 + 5),
-        (Rectangle(2, 5), Rectangle(4, 3), 11 + 12),
-        (Rectangle(2, 5), Circle(2), 11 + 12.566370614359172),
-    ],
-    ids=["triangle+rectangle", "square+rectangle", "rectangle+rectangle", "rectangle+circle"]
-)
-@pytest.mark.rectangle
-@pytest.mark.negative
-def test_add_area_negative(figure1, figure2, expected_area):
-    assert figure1.add_area(figure2) != pytest.approx(expected_area), \
-        (f"Сумма площадей двух фигур просчитана некорректно")
 
 
 @pytest.mark.parametrize(

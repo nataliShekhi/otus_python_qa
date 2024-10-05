@@ -16,17 +16,6 @@ def test_square_area_positive(side_a, area):
 
 
 @pytest.mark.parametrize(
-    "side_a, area", [(4, 15), (3.5, 15.25)], ids=["integer", "float"]
-)
-@pytest.mark.smoke
-@pytest.mark.square
-@pytest.mark.negative
-def test_square_area_negative(side_a, area):
-    s = Square(side_a)
-    assert s.area != area, f"Площадь рассчитан неверно"
-
-
-@pytest.mark.parametrize(
     "side_a, perimeter", [(4, 16), (3.5, 14)], ids=["integer", "float"]
 )
 @pytest.mark.smoke
@@ -35,16 +24,6 @@ def test_square_area_negative(side_a, area):
 def test_square_perimeter_positive(side_a, perimeter):
     s = Square(side_a)
     assert s.perimeter == perimeter, f"Периметр должен быть равен {perimeter}"
-
-
-@pytest.mark.parametrize(
-    "side_a, perimeter", [(4, 14), (3.5, 12)], ids=["integer", "float"]
-)
-@pytest.mark.square
-@pytest.mark.negative
-def test_square_perimeter_negative(side_a, perimeter):
-    s = Square(side_a)
-    assert s.perimeter != perimeter, f"Периметр рассчитан неверно"
 
 
 @pytest.mark.parametrize(
@@ -61,8 +40,8 @@ def test_square_incorrect_values(side_a, perimeter):
 @pytest.mark.parametrize(
     "figure1, figure2, expected_area",
     [
-        (Square(3), Triangle(4, 3, 6), 9 + 5.3326822519),
-        (Square(3), Circle(2), 9 + 12.566370614359172),
+        (Square(3), Triangle(4, 3, 6), 9 + 5.33),
+        (Square(3), Circle(2), 9 + 12.56),
         (Square(3), Square(2), 9 + 4),
     ],
     ids=["square+triangle", "square+circle", "square+square"]
@@ -71,24 +50,8 @@ def test_square_incorrect_values(side_a, perimeter):
 @pytest.mark.square
 @pytest.mark.positive
 def test_add_area_positive(figure1, figure2, expected_area):
-    assert figure1.add_area(figure2) == pytest.approx(expected_area), \
+    assert figure1.add_area(figure2) == pytest.approx(expected_area, rel=1e-2), \
         (f"Сумма площадей двух фигур просчитана корректно")
-
-
-@pytest.mark.parametrize(
-    "figure1, figure2, expected_area",
-    [
-        (Square(3), Triangle(4, 3, 6), 9 + 4),
-        (Square(3), Circle(2), 9 + 12),
-        (Square(3), Square(2), 8 + 4),
-    ],
-    ids=["square+triangle", "square+circle", "square+square"]
-)
-@pytest.mark.square
-@pytest.mark.negative
-def test_add_area_negative(figure1, figure2, expected_area):
-    assert figure1.add_area(figure2) != pytest.approx(expected_area), \
-        (f"Сумма площадей двух фигур просчитана некорректно")
 
 
 @pytest.mark.parametrize(

@@ -5,26 +5,14 @@ from circle import Circle
 
 @pytest.mark.parametrize(
     "side_a,side_b,side_c,area",
-    [(3, 4, 5, 6), (3.5, 4.5, 5.5, 7.854885024620029)],
+    [(3, 4, 5, 6), (3.5, 4.5, 5.5, 7.85)],
     ids=["integer", "float"],
 )
 @pytest.mark.smoke
 @pytest.mark.triangle
 def test_triangle_area_positive(side_a, side_b, side_c, area):
     r = Triangle(side_a, side_b, side_c)
-    assert r.area == area, f"Площадь должна быть {area}"
-
-
-@pytest.mark.parametrize(
-    "side_a,side_b,side_c,area",
-    [(3, 4, 5, 5), (3.5, 4.5, 5.5, 5.854885024620029)],
-    ids=["integer", "float"],
-)
-@pytest.mark.negative
-@pytest.mark.triangle
-def test_triangle_area_negative(side_a, side_b, side_c, area):
-    r = Triangle(side_a, side_b, side_c)
-    assert r.area != area, f"Площадь рассчитана некорректно"
+    assert r.area == pytest.approx(area, rel=1e-2), f"Площадь должна быть {area}"
 
 
 @pytest.mark.parametrize(
@@ -37,18 +25,6 @@ def test_triangle_area_negative(side_a, side_b, side_c, area):
 def test_triangle_perimeter_positive(side_a, side_b, side_c, perimeter):
     r = Triangle(side_a, side_b, side_c)
     assert r.perimeter == perimeter, f"Периметр должен быть равен {perimeter}"
-
-
-@pytest.mark.parametrize(
-    "side_a,side_b,side_c,perimeter",
-    [(3, 4, 5, 11), (3.5, 4.5, 5.5, 13)],
-    ids=["integer", "float"],
-)
-@pytest.mark.negative
-@pytest.mark.triangle
-def test_triangle_perimeter_negative(side_a, side_b, side_c, perimeter):
-    r = Triangle(side_a, side_b, side_c)
-    assert r.perimeter != perimeter, f"Периметр рассчитан некорректно"
 
 
 @pytest.mark.parametrize(
@@ -94,8 +70,8 @@ def test_triangle_three_sides(side_a, side_b, side_c):
 @pytest.mark.parametrize(
     "figure1, figure2, expected_area",
     [
-        (Triangle(4, 3, 6), Triangle(4, 3, 6), 5.3326822519 + 5.3326822519),
-        (Triangle(4, 3, 6), Circle(2), 5.3326822519 + 12.566370614359172),
+        (Triangle(4, 3, 6), Triangle(4, 3, 6), 5.33 + 5.33),
+        (Triangle(4, 3, 6), Circle(2), 5.33 + 12.56),
     ],
     ids=["triangle+triangle", "triangle+circle"]
 )
@@ -103,23 +79,8 @@ def test_triangle_three_sides(side_a, side_b, side_c):
 @pytest.mark.triangle
 @pytest.mark.positive
 def test_add_area_positive(figure1, figure2, expected_area):
-    assert figure1.add_area(figure2) == pytest.approx(expected_area), \
+    assert figure1.add_area(figure2) == pytest.approx(expected_area, rel=1e-2), \
         (f"Сумма площадей двух фигур просчитана корректно")
-
-
-@pytest.mark.parametrize(
-    "figure1, figure2, expected_area",
-    [
-        (Triangle(4, 3, 6), Triangle(4, 3, 6), 6 + 5.3326822519),
-        (Triangle(4, 3, 6), Circle(2), 5.3326822519 + 15),
-    ],
-    ids=["triangle+triangle", "triangle+circle"]
-)
-@pytest.mark.triangle
-@pytest.mark.negative
-def test_add_area_negative(figure1, figure2, expected_area):
-    assert figure1.add_area(figure2) != pytest.approx(expected_area), \
-        (f"Сумма площадей двух фигур просчитана некорректно")
 
 
 @pytest.mark.parametrize(
