@@ -33,8 +33,9 @@ def test_square_perimeter_positive(side_a, perimeter):
 @pytest.mark.square
 @pytest.mark.negative
 def test_square_incorrect_values(side_a, perimeter):
-    s = Square(side_a)
-    assert s.side_a <= 0, f"Сторона квадрата не может быть равна или меньше 0"
+    with pytest.raises(ValueError):
+        s = Square(side_a)
+        assert s.side_a <= 0, f"Сторона квадрата не может быть равна или меньше 0"
 
 
 @pytest.mark.parametrize(

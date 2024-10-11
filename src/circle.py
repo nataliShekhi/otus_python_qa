@@ -7,9 +7,10 @@ class Circle(Figure):
         if radius <= 0:
             raise ValueError("Радиус круга не может быть меньше 0")
         self.radius = radius
+
     @property
     def area(self):
-        return math.pi * self.radius ** 2
+        return math.pi * self.radius**2
 
     @property
     def perimeter(self):

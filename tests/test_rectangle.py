@@ -35,10 +35,11 @@ def test_rectangle_perimeter_positive(side_a, side_b, perimeter):
 @pytest.mark.negative
 @pytest.mark.rectangle
 def test_rectangle_incorrect_values(side_a, side_b):
-    r = Rectangle(side_a, side_b)
-    assert (
+    with pytest.raises(ValueError):
+        r = Rectangle(side_a, side_b)
+        assert (
         r.side_a <= 0 or r.side_b <= 0
-    ), f"Стороны прямоугольника не могут равны или меньше 0"
+        ), f"Стороны прямоугольника не могут равны или меньше 0"
 
 
 @pytest.mark.parametrize(

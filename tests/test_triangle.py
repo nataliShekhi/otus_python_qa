@@ -36,8 +36,9 @@ def test_triangle_perimeter_positive(side_a, side_b, side_c, perimeter):
 @pytest.mark.negative
 @pytest.mark.triangle
 def test_triangle_incorrect_values(side_a, side_b, side_c):
-    r = Triangle(side_a, side_b, side_c)
-    assert r.side_a <= 0 or r.side_b <= 0 or r.side_c <= 0, f"Стороны треугольника должны быть больше 0"
+    with pytest.raises(ValueError):
+        r = Triangle(side_a, side_b, side_c)
+        assert r.side_a <= 0 or r.side_b <= 0 or r.side_c <= 0, f"Стороны треугольника должны быть больше 0"
 
 
 @pytest.mark.parametrize(

@@ -26,14 +26,15 @@ def test_circle_perimeter_positive(radius, perimeter):
 
 
 @pytest.mark.parametrize(
-    "radius", [(-3)], ids=["negative radius"]
+    "radius", [-3, 0], ids=["negative radius", "zero"]
 )
 @pytest.mark.smoke
 @pytest.mark.negative
 @pytest.mark.circle
 def test_circle_incorrect_values(radius):
-    r = Circle(radius)
-    assert r.radius <= 0, f"Радиус круга не может быть равен или меньше 0"
+    with pytest.raises(ValueError):
+        Circle(radius)
+    assert radius <= 0, f"Радиус круга не может быть равен или меньше 0"
 
 
 @pytest.mark.parametrize(
