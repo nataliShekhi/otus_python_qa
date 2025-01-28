@@ -9,5 +9,3 @@ def get_path(filename: str):
 
 JSON_FILE_PATH = get_path(filename="users.json")
 CSV_FILE_PATH = get_path(filename="books.csv")
-
-JPEG_FILE_PATH = get_path(filename="example.jpeg")
